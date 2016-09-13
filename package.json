@@ -6,7 +6,7 @@
   "main": "measurement.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Philzen/measurement.js"
+    "url": "git://github.com/cyrixmorten/measurement.js"
   },
   "license": "MIT",
   "author": "Philzen <phil AT patient-radio.de>",
