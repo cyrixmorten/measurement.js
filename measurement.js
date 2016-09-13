@@ -35,8 +35,8 @@
 			BAR: 'bar'
 		},
 		Temperature: {
-			CELSIUS: 'c',
-			FAHRENHEIT: 'f',
+			CELSIUS: 'C',
+			FAHRENHEIT: 'F',
 			KELVIN: 'k'
 		},
 		Duration: {
@@ -50,6 +50,14 @@
 			MILLIGRAM: 'mg',
 			OUNCE: 'oz',
 			POUND: 'lb'
+		},
+		Power: {
+			KILOWATT: 'kW',
+			WATT: 'W'
+		},
+		Area: {
+			SQUAREMETER: 'm²',
+			SQUAREFEET: 'ft²'
 		}
 	};
 
@@ -155,17 +163,17 @@
 			}
 		},
 		Temperature: {
-			'c': {
+			'C': {
 				key: UNIT.Temperature.CELSIUS,
 				base: null
 			},
-			'f': {
+			'F': {
 				key: UNIT.Temperature.FAHRENHEIT,
 				base: UNIT.Temperature.CELSIUS,
 				factor: function(value, reverse) {
 					if (reverse) {
 						return value * 1.8 + 32;
-                    }
+					}
 
 					return (value - 32) * 5 / 9;
 				}
@@ -177,13 +185,13 @@
 					/**
 					 * Really strange rounding error:
 					 * (100 - 273.15) gives -173.14999999999998 (tested in Chrome 26.0.1410.63)
-					 * 
+					 *
 					 * Following workarounds:
 					 */
 					if (reverse) {
 						return parseFloat((value + 273 + 0.15).toFixed(10));
 					}
-					
+
 					return (value - 273) - 0.15;
 				}
 			}
@@ -261,8 +269,55 @@
 					en: 'Pounds'
 				}
 			}
+		},
+		Power: {
+			'kW': {
+				key: UNIT.Power.KILOWATT,
+				base: UNIT.Power.WATT,
+				factor: 1000,
+				name: {
+					en: 'Kilowatt'
+				},
+				plural: {
+					en: 'Kilowatts'
+				}
+			},
+			'W': {
+				key: UNIT.Power.WATT,
+				base: null,
+				factor: 1,
+				name: {
+					en: 'Watt'
+				},
+				plural: {
+					en: 'Watts'
+				}
+			}
+		},
+		Area: {
+			'm²': {
+				key: UNIT.Area.SQUAREMETER,
+				base: UNIT.Area.SQUAREFEET,
+				factor:10.763915051182,
+				name: {
+					de: 'Square meter',
+					en: 'Square meter',
+					en_GB: 'Square meter'
+				}
+			},
+			'ft²': {
+				key: UNIT.Area.SQUAREFEET,
+				base: null,
+				factor: 1,
+				name: {
+					de: 'Square feet',
+					en: 'Square feet',
+					en_GB: 'Square feet'
+				}
+			}
 		}
 	};
+
 
 	function MeasurementConverter(unitType) {
 		var inputUnit = null,
